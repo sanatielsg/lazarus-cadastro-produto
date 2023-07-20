@@ -1,0 +1,68 @@
+object FrmProduto: TFrmProduto
+  Left = 482
+  Height = 306
+  Top = 286
+  Width = 472
+  Caption = 'Cadastro de Produto'
+  ClientHeight = 306
+  ClientWidth = 472
+  LCLVersion = '2.2.6.0'
+  object BtnGravar: TButton
+    Left = 24
+    Height = 42
+    Top = 240
+    Width = 104
+    Caption = 'Gravar'
+    OnClick = BtnGravarClick
+    TabOrder = 0
+  end
+  object EdtDescricao: TEdit
+    Left = 24
+    Height = 23
+    Top = 88
+    Width = 368
+    MaxLength = 100
+    TabOrder = 1
+  end
+  object Label1: TLabel
+    Left = 24
+    Height = 15
+    Top = 72
+    Width = 106
+    Caption = 'Descrição Completa'
+    ParentColor = False
+  end
+  object EdtEAN: TEdit
+    Left = 24
+    Height = 23
+    Top = 136
+    Width = 208
+    MaxLength = 14
+    TabOrder = 2
+  end
+  object Label2: TLabel
+    Left = 24
+    Height = 15
+    Top = 120
+    Width = 90
+    Caption = 'Código de Barras'
+    ParentColor = False
+  end
+  object EdtCodigo: TEdit
+    Left = 24
+    Height = 23
+    Top = 31
+    Width = 80
+    NumbersOnly = True
+    OnExit = EdtCodigoExit
+    TabOrder = 3
+  end
+  object Label3: TLabel
+    Left = 24
+    Height = 15
+    Top = 16
+    Width = 39
+    Caption = 'Código'
+    ParentColor = False
+  end
+end
