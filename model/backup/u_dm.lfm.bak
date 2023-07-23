@@ -1,0 +1,23 @@
+object DM: TDM
+  OldCreateOrder = False
+  Height = 284
+  HorizontalOffset = 511
+  VerticalOffset = 277
+  Width = 336
+  object Con: TZConnection
+    ControlsCodePage = cCP_UTF8
+    AutoEncodeStrings = True
+    Properties.Strings = (
+      'AutoEncodeStrings=True'
+      'controls_cp=CP_UTF8'
+    )
+    Port = 0
+    Database = 'D:\teste\TESTE.FDB'
+    User = 'SYSDBA'
+    Password = 'masterkey'
+    Protocol = 'firebirdd-2.5'
+    LibraryLocation = 'D:\app\Firebird-2.5.9.27139-0_Win32\bin\fbclient.dll'
+    Left = 40
+    Top = 32
+  end
+end

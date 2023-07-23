@@ -65,6 +65,7 @@ begin
       Produto.EAN:= EdtEAN.Text;
       NovoProduto := ProdutoController.Creating(Produto);
       ShowMessage('Produto '+ IntToStr(NovoProduto) + ' cadastrado!' );
+      EdtCodigo.Text := IntToStr(NovoProduto);
     except
      On E:Exception do
         ShowMessage('Ocorreu um erro:: '+ E.Message);
@@ -85,7 +86,7 @@ begin
       Produto := ProdutoController.Read( StrToInt(EdtCodigo.Text));
       if (Produto <> nil) then
       begin
-        EdtCodigo.Text    := Produto.Codigo;
+        EdtCodigo.Text    := IntToStr(Produto.Codigo);
         EdtDescricao.Text := Produto.Descricao;
         EdtEAN.Text       := Produto.EAN;
       end else

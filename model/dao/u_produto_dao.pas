@@ -5,7 +5,7 @@ unit u_produto_dao;
 interface
 
 uses
-  Classes, SysUtils, u_produto;
+  Classes, SysUtils, u_produto, u_dm;
 
 type
 
@@ -18,6 +18,8 @@ type
       function Read(Value : Integer) : TProduto;
       function Update(Value : TProduto) : TProduto;
       function Delete(Value : Integer) : Boolean;
+
+      function GetNextId() : Integer;
   end;
 
 implementation
@@ -26,18 +28,44 @@ implementation
 
 function TProdutoDAO.Creating(Value : TProduto): Integer;
   var sql : string;
+      nextId : Integer;
 begin
-  Raise Exception.Create('Ocorreu um erro na gravação do produto!');
-  Result := 996; //novo código de produto criado
+  nextId := GetNextId();
+  with (DM) do
+  begin
+    Qry.Close;
+    Qry.SQL.Clear;
+    sql := 'insert into produto (codigo, descricao, ean)'
+         + 'values (:codigo, :descricao, :ean)';
+    Qry.SQL.Add(sql);
+    Qry.ParamByName('codigo').AsInteger:= nextId;
+    Qry.ParamByName('descricao').AsString:= Value.Descricao;
+    Qry.ParamByName('ean').AsString:= Value.EAN;
+    Qry.ExecSQL;
+  end;
+  Result := nextId;
 end;
 
 function TProdutoDAO.Read(Value: Integer): TProduto;
   var Produto : TProduto;
+      sql : string;
 begin
-  Produto := Tproduto.Create; //criei um objeto,tenho que destruir...
-  Produto.Codigo:= 996;
-  Produto.Descricao:= 'COCA COLA 2L';
-  Produto.EAN:= '7894900011517';
+  Produto := Tproduto.Create;
+  with (DM) do
+  begin
+    Qry.Close;
+    Qry.SQL.Clear;
+    sql := 'select * from produto where codigo = :codigo';
+    Qry.SQL.Add(sql);
+    Qry.ParamByName('codigo').AsInteger:= Value;
+    Qry.Open;
+    if (Qry.RecordCount > 0) then
+    begin
+      Produto.Codigo    := Qry.FieldByName('codigo').AsInteger;
+      Produto.Descricao := Qry.FieldByName('descricao').AsString;
+      Produto.EAN       := Qry.FieldByName('ean').AsString;
+    end;
+  end;
   Result := Produto;
 end;
 
@@ -56,6 +84,11 @@ begin
   //fazer os comandos e confirmar
   //if rows affected
   Result := True;
+end;
+
+function TProdutoDAO.GetNextId: Integer;
+begin
+  Result := 2;
 end;
 
 end.

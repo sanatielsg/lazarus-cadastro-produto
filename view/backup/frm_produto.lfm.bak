@@ -1,7 +1,7 @@
 object FrmProduto: TFrmProduto
-  Left = 482
+  Left = 393
   Height = 306
-  Top = 286
+  Top = 273
   Width = 472
   Caption = 'Cadastro de Produto'
   ClientHeight = 306
@@ -21,6 +21,7 @@ object FrmProduto: TFrmProduto
     Height = 23
     Top = 88
     Width = 368
+    CharCase = ecUppercase
     MaxLength = 100
     TabOrder = 1
   end
@@ -53,6 +54,7 @@ object FrmProduto: TFrmProduto
     Height = 23
     Top = 31
     Width = 80
+    Enabled = False
     NumbersOnly = True
     OnExit = EdtCodigoExit
     TabOrder = 3

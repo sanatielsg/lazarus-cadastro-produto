@@ -65,6 +65,7 @@ begin
       Produto.EAN:= EdtEAN.Text;
       NovoProduto := ProdutoController.Creating(Produto);
       ShowMessage('Produto '+ IntToStr(NovoProduto) + ' cadastrado!' );
+      EdtCodigo.Text := IntToStr(NovoProduto);
     except
      On E:Exception do
         ShowMessage('Ocorreu um erro:: '+ E.Message);
