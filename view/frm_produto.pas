@@ -5,24 +5,28 @@ unit frm_produto;
 interface
 
 uses
-  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls,
-  u_produto, u_produto_controller;
+  Classes, SysUtils, Forms, Controls, Graphics, Dialogs, StdCtrls, ComCtrls,
+  Grids, u_produto, u_produto_controller;
 
 type
 
   { TFrmProduto }
 
   TFrmProduto = class(TForm)
-    BtnNovo: TButton;
-    BtnInclusao: TButton;
     BtnExcluir: TButton;
+    BtnInclusao: TButton;
+    BtnNovo: TButton;
     BtnSair: TButton;
     EdtCodigo: TEdit;
-    EdtEAN: TEdit;
     EdtDescricao: TEdit;
+    EdtEAN: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
+    PageControl1: TPageControl;
+    StringGrid1: TStringGrid;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     procedure BtnInclusaoClick(Sender: TObject);
     procedure BtnNovoClick(Sender: TObject);
     procedure BtnSairClick(Sender: TObject);
@@ -98,6 +102,9 @@ begin
   ProdutoController := TProdutoController.Create;
   try
     try
+      if (Length(EdtDescricao.Text) < 3 ) then
+        Raise Exception.Create('descricao não pode ter menos que 3 caracteres ');
+
       Produto.Codigo:= -1;
       Produto.Descricao:= EdtDescricao.Text;
       Produto.EAN:= EdtEAN.Text;
@@ -108,6 +115,7 @@ begin
      On E:Exception do
         ShowMessage('Ocorreu um erro:: '+ E.Message);
     end;
+
   finally
     FreeAndNil(Produto);
     FreeAndNil(ProdutoController);

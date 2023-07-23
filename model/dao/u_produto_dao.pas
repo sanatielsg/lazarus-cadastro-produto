@@ -88,7 +88,7 @@ end;
 
 function TProdutoDAO.GetNextId: Integer;
 begin
-  Result := 2;
+  Result := 10;
 end;
 
 end.

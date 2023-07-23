@@ -13,6 +13,7 @@ type
   TProdutoController = class(TObject)
     public
       function Creating(Value : TProduto) : Integer;
+      function Read(Value : Integer): TProduto;
   end;
 
 implementation
@@ -24,7 +25,19 @@ var DAO : TProdutoDAO;
 begin
   DAO := TProdutoDAO.Create();
   try
+     //Data Access Object - DAO
      Result := DAO.Creating(Value);
+  finally
+    FreeAndNil(DAO);
+  end;
+end;
+
+function TProdutoController.Read(Value: Integer): TProduto;
+var DAO : TProdutoDAO;
+begin
+  DAO := TProdutoDAO.Create();
+  try
+     Result := DAO.Read(Value);
   finally
     FreeAndNil(DAO);
   end;

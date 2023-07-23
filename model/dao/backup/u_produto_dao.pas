@@ -59,12 +59,12 @@ begin
     Qry.SQL.Add(sql);
     Qry.ParamByName('codigo').AsInteger:= Value;
     Qry.Open;
-  end;
-  if (Qry.RecordCount > 0) then
-  begin
-    Produto.Codigo    := Qry.FieldByName('codigo').AsInteger;
-    Produto.Descricao := Qry.FieldByName('descricao').AsString;
-    Produto.EAN       := Qry.FieldByName('ean').AsString;
+    if (Qry.RecordCount > 0) then
+    begin
+      Produto.Codigo    := Qry.FieldByName('codigo').AsInteger;
+      Produto.Descricao := Qry.FieldByName('descricao').AsString;
+      Produto.EAN       := Qry.FieldByName('ean').AsString;
+    end;
   end;
   Result := Produto;
 end;
@@ -88,7 +88,7 @@ end;
 
 function TProdutoDAO.GetNextId: Integer;
 begin
-  Result := 2;
+  Result := 10;
 end;
 
 end.

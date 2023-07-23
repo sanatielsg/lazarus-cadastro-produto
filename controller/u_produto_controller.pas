@@ -25,6 +25,7 @@ var DAO : TProdutoDAO;
 begin
   DAO := TProdutoDAO.Create();
   try
+     //Data Access Object - DAO
      Result := DAO.Creating(Value);
   finally
     FreeAndNil(DAO);
