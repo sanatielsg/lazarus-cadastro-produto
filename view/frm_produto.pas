@@ -13,20 +13,26 @@ type
   { TFrmProduto }
 
   TFrmProduto = class(TForm)
-    BtnGravar: TButton;
+    BtnNovo: TButton;
+    BtnInclusao: TButton;
+    BtnExcluir: TButton;
+    BtnSair: TButton;
     EdtCodigo: TEdit;
     EdtEAN: TEdit;
     EdtDescricao: TEdit;
     Label1: TLabel;
     Label2: TLabel;
     Label3: TLabel;
-    procedure BtnGravarClick(Sender: TObject);
+    procedure BtnInclusaoClick(Sender: TObject);
+    procedure BtnNovoClick(Sender: TObject);
+    procedure BtnSairClick(Sender: TObject);
     procedure EdtCodigoExit(Sender: TObject);
   private
 
   public
     procedure Gravar();
     procedure Buscar();
+    procedure Alterar();
   end;
 
 var
@@ -38,9 +44,41 @@ implementation
 
 { TFrmProduto }
 
-procedure TFrmProduto.BtnGravarClick(Sender: TObject);
+procedure TFrmProduto.BtnNovoClick(Sender: TObject);
 begin
-  Gravar();
+  if (Btnnovo.Caption = 'Cancelar') then
+  begin
+    BtnNovo.Caption     := 'Novo';
+    BtnInclusao.Enabled := False;
+    BtnExcluir.Enabled  := False;
+    EdtCodigo.Text    := '';
+    EdtDescricao.Text := '';
+    EdtEAN.Text       := '';
+    EdtDescricao.Enabled := False;
+    EdtEAN.Enabled       := False;
+    BtnInclusao.Caption  := 'Inclusão';
+  end else
+  if (Btnnovo.Caption = 'Novo') then
+  begin
+    BtnNovo.Caption     := 'Cancelar';
+    BtnInclusao.Enabled := True;
+    BtnExcluir.Enabled  := False;
+    EdtDescricao.Enabled := True;
+    EdtEAN.Enabled       := True;
+  end;
+end;
+
+procedure TFrmProduto.BtnInclusaoClick(Sender: TObject);
+begin
+  if (BtnInclusao.Caption = 'Inclusão') then
+    Gravar()
+  else if (BtnInclusao.Caption = 'Alteração ') then
+    Alterar()
+end;
+
+procedure TFrmProduto.BtnSairClick(Sender: TObject);
+begin
+  Application.Terminate;
 end;
 
 procedure TFrmProduto.EdtCodigoExit(Sender: TObject);
@@ -89,6 +127,14 @@ begin
         EdtCodigo.Text    := IntToStr(Produto.Codigo);
         EdtDescricao.Text := Produto.Descricao;
         EdtEAN.Text       := Produto.EAN;
+
+        BtnExcluir.Enabled   := True;
+        BtnNovo.Caption      := 'Cancelar';
+        BtnInclusao.Caption  := 'Alterar';
+        BtnInclusao.Enabled  := True;
+        EdtDescricao.Enabled := True;
+        EdtEAN.Enabled       := True;
+
       end else
       ShowMessage('Produto não encontrado!');
     except
@@ -98,6 +144,11 @@ begin
   finally
     FreeAndNil(ProdutoController);
   end;
+end;
+
+procedure TFrmProduto.Alterar;
+begin
+
 end;
 
 end.

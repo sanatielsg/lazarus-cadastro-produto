@@ -7,13 +7,13 @@ object FrmProduto: TFrmProduto
   ClientHeight = 306
   ClientWidth = 472
   LCLVersion = '2.2.6.0'
-  object BtnGravar: TButton
-    Left = 24
+  object BtnNovo: TButton
+    Left = 17
     Height = 42
     Top = 240
     Width = 104
-    Caption = 'Gravar'
-    OnClick = BtnGravarClick
+    Caption = 'Novo'
+    OnClick = BtnNovoClick
     TabOrder = 0
   end
   object EdtDescricao: TEdit
@@ -54,7 +54,6 @@ object FrmProduto: TFrmProduto
     Height = 23
     Top = 31
     Width = 80
-    Enabled = False
     NumbersOnly = True
     OnExit = EdtCodigoExit
     TabOrder = 3
@@ -66,5 +65,33 @@ object FrmProduto: TFrmProduto
     Width = 39
     Caption = 'Código'
     ParentColor = False
+  end
+  object BtnInclusao: TButton
+    Left = 129
+    Height = 42
+    Top = 240
+    Width = 104
+    Caption = 'Inclusão'
+    Enabled = False
+    OnClick = BtnInclusaoClick
+    TabOrder = 4
+  end
+  object BtnExcluir: TButton
+    Left = 241
+    Height = 42
+    Top = 240
+    Width = 104
+    Caption = 'Excluir'
+    Enabled = False
+    TabOrder = 5
+  end
+  object BtnSair: TButton
+    Left = 353
+    Height = 42
+    Top = 240
+    Width = 104
+    Caption = 'Sair'
+    OnClick = BtnSairClick
+    TabOrder = 6
   end
 end
